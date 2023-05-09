@@ -29,7 +29,7 @@ namespace Microsoft.Maui.Controls
 			[nameof(IView.Focus)] = MapFocus,
 		};
 
-		internal static void RemapForControls()
+		internal static new void RemapForControls()
 		{
 			ViewHandler.ViewMapper = ControlsVisualElementMapper;
 			ViewHandler.ViewCommandMapper = ControlsViewCommandMapper;

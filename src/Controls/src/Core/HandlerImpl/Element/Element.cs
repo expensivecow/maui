@@ -13,5 +13,9 @@ namespace Microsoft.Maui.Controls
 			[AutomationProperties.IsInAccessibleTreeProperty.PropertyName] = MapAutomationPropertiesIsInAccessibleTree,
 			[AutomationProperties.ExcludedWithChildrenProperty.PropertyName] = MapAutomationPropertiesExcludedWithChildren,
 		};
+
+		internal static void RemapForControls()
+		{
+		}
 	}
 }
