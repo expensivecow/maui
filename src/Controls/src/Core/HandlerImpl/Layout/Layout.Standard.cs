@@ -1,4 +1,6 @@
 ﻿#nullable disable
+using System;
+
 namespace Microsoft.Maui.Controls
 {
 	public partial class Layout
@@ -7,6 +9,6 @@ namespace Microsoft.Maui.Controls
 
 		public static void MapInputTransparent(ILayoutHandler handler, Layout layout) { }
 
-		static void MapInputTransparent(IViewHandler handler, IView layout) { }
+		static void MapInputTransparent(IViewHandler handler, IView view) { }
 	}
 }
