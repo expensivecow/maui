@@ -6,6 +6,7 @@ namespace Microsoft.Maui.Controls
 {
 	public partial class Window
 	{
+		[Obsolete("Use WindowHandler.Mapper instead.")]
 		public static IPropertyMapper<IWindow, WindowHandler> ControlsWindowMapper =
 			new PropertyMapper<Window, WindowHandler>(WindowHandler.Mapper);
 
