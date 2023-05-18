@@ -338,12 +338,7 @@ namespace Microsoft.Maui.Controls.Handlers.Items
 			}
 		}
 
-#if NET8_0_OR_GREATER
-		protected
-#else
-		internal
-#endif
-		virtual string DetermineCellReuseId(NSIndexPath indexPath)
+		protected virtual string DetermineCellReuseId(NSIndexPath indexPath)
 		{
 			if (ItemsView.ItemTemplate != null)
 			{
@@ -370,9 +365,7 @@ namespace Microsoft.Maui.Controls.Handlers.Items
 				: VerticalDefaultCell.ReuseId;
 		}
 
-#if NET8_0_OR_GREATER
 		[Obsolete("Use DetermineCellReuseId(NSIndexPath indexPath) instead.")]
-#endif
 		protected virtual string DetermineCellReuseId()
 		{
 			if (ItemsView.ItemTemplate != null)
