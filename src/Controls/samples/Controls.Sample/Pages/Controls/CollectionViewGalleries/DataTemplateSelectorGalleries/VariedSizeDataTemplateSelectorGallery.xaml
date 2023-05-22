@@ -6,35 +6,35 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <DataTemplate x:Key="MilkTemplate">
-                <Border Stroke="Red" Background="Wheat" HeightRequest="100">
-                    <Grid HeightRequest="100">
+                <Frame BorderColor="Red" BackgroundColor="Wheat" HeightRequest="100">
+                    <StackLayout HeightRequest="100">
                         <Label Text="{Binding Name}" />
-                    </Grid>
-                </Border>
+                    </StackLayout>
+                </Frame>
             </DataTemplate>
 
             <DataTemplate x:Key="CoffeeTemplate">
-                <Border Stroke="Red" Background="SaddleBrown" HeightRequest="50">
-                    <Grid HeightRequest="50">
+                <Frame BorderColor="Red" BackgroundColor="SaddleBrown" HeightRequest="50">
+                    <StackLayout HeightRequest="50">
                         <Label Text="{Binding Name}" />
-                    </Grid>
-                </Border>
+                    </StackLayout>
+                </Frame>
             </DataTemplate>
 
             <DataTemplate x:Key="LatteTemplate" x:DataType="datatemplateselectorgalleries:Latte">
-                <Border Stroke="Red" Background="BurlyWood" >
-                    <VerticalStackLayout>
+                <Frame BorderColor="Red" BackgroundColor="BurlyWood" >
+                    <StackLayout>
                         <Label Text="{Binding Name, StringFormat='Drink name is: {0}'}"/>
                         <Label Text="     The ingredients are: " Margin="0,10,0,0"/>
-                        <VerticalStackLayout BindableLayout.ItemsSource="{Binding Ingredients}" >
+                        <StackLayout BindableLayout.ItemsSource="{Binding Ingredients}" >
                             <BindableLayout.ItemTemplate>
                                 <DataTemplate x:DataType="datatemplateselectorgalleries:DrinkBase">
                                     <Label Text="{Binding Name, StringFormat='    {0}'}" />
                                 </DataTemplate>
                             </BindableLayout.ItemTemplate>
-                        </VerticalStackLayout>
-                    </VerticalStackLayout>
-                </Border>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
             </DataTemplate>
 
             <datatemplateselectorgalleries:DrinkTemplateSelector x:Key="VehicleTemplateSelector"
@@ -45,7 +45,11 @@
     </ContentPage.Resources>
     
     <ContentPage.Content>
-            <Grid RowDefinitions="*,Auto">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
 
                 <CollectionView ItemsSource="{Binding Items}" 
                             ItemTemplate="{StaticResource VehicleTemplateSelector}"
@@ -72,6 +76,7 @@
 
                     <Picker x:Name="TemplatePicker"
                         Title="Select a template"
+                        TitleColor="Red"
                         SelectedItem="{Binding SelectedTemplate}">
                         <Picker.ItemsSource>
                             <x:Array Type="{x:Type x:String}">

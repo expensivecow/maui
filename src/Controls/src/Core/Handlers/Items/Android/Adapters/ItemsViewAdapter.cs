@@ -18,7 +18,6 @@ namespace Microsoft.Maui.Controls.Handlers.Items
 
 		bool _disposed;
 		bool _usingItemTemplate = false;
-		DataTemplateSelector _itemTemplateSelector = null;
 
 		protected internal ItemsViewAdapter(TItemsView itemsView, Func<View, Context, ItemContentView> createItemContentView = null)
 		{
@@ -87,36 +86,16 @@ namespace Microsoft.Maui.Controls.Handlers.Items
 
 			var itemContentView = _createItemContentView.Invoke(ItemsView, context);
 
-			// See if our cached templates have a match
-			if (_viewTypeDataTemplates.TryGetValue(viewType, out var dataTemplate))
-			{
-				return new TemplatedItemViewHolder(itemContentView, dataTemplate, IsSelectionEnabled(parent, viewType));
-			}
-
 			return new TemplatedItemViewHolder(itemContentView, ItemsView.ItemTemplate, IsSelectionEnabled(parent, viewType));
 		}
 
 		public override int ItemCount => ItemsSource.Count;
 
-		System.Collections.Generic.Dictionary<int, DataTemplate> _viewTypeDataTemplates = new();
-
 		public override int GetItemViewType(int position)
 		{
 			if (_usingItemTemplate)
 			{
-				if (_itemTemplateSelector is null)
-					return ItemViewType.TemplatedItem;
-
-				var item = ItemsSource?.GetItem(position);
-
-				var template = _itemTemplateSelector?.SelectTemplate(item, ItemsView);
-				var id = template?.Id ?? ItemViewType.TemplatedItem;
-
-				// Cache the data template for future use
-				if (!_viewTypeDataTemplates.ContainsKey(id))
-					_viewTypeDataTemplates.Add(id, template);
-
-				return id;
+				return ItemViewType.TemplatedItem;
 			}
 
 			// No template, just use the Text view
@@ -139,11 +118,6 @@ namespace Microsoft.Maui.Controls.Handlers.Items
 			}
 		}
 
-		public override long GetItemId(int position)
-		{
-			return position;
-		}
-
 		public virtual int GetPositionForItem(object item)
 		{
 			return ItemsSource.GetPosition(item);
@@ -157,7 +131,6 @@ namespace Microsoft.Maui.Controls.Handlers.Items
 		void UpdateUsingItemTemplate()
 		{
 			_usingItemTemplate = ItemsView.ItemTemplate != null;
-			_itemTemplateSelector = ItemsView.ItemTemplate as DataTemplateSelector;
 		}
 	}
 }

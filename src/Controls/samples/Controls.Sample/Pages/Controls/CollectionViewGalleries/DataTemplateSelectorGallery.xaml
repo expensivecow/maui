@@ -7,16 +7,24 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <DataTemplate x:Key="DefaultTemplate">
-                <Grid HeightRequest="50" RowDefinitions="Auto,Auto">
-                    
+                <Grid HeightRequest="50">
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+
                     <Image Source="coffee.png" AutomationId="weekday"/>
 
                     <Label Grid.Row="1" Text="{Binding Date, StringFormat='{}{0:dddd}'}"></Label>
                 </Grid>
             </DataTemplate>
             <DataTemplate x:Key="WeekendTemplate">
-                <Grid HeightRequest="50" RowDefinitions="Auto,Auto">
-                    
+                <Grid HeightRequest="50">
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+
                     <Image Source="oasis.jpg" AutomationId="weekend"/>
 
                     <Label Grid.Row="1" Text="It's the weekend! Woot!"></Label>
@@ -24,11 +32,15 @@
             </DataTemplate>
 
             <DataTemplate x:Key="EmptyTemplate">
-                <Label Text="{Binding ., StringFormat='({0}) does not match any day of the week.'}"></Label>
+                <StackLayout>
+                    <Label Text="{Binding ., StringFormat='({0}) does not match any day of the week.'}"></Label>
+                </StackLayout>
             </DataTemplate>
 
             <DataTemplate x:Key="SymbolsTemplate">
-                <Label Background="Red" Text="{Binding ., StringFormat='({0}) _definitely_ does not match any day of the week.'}"></Label>
+                <StackLayout BackgroundColor="Red">
+                    <Label Text="{Binding ., StringFormat='({0}) _definitely_ does not match any day of the week.'}"></Label>
+                </StackLayout>
             </DataTemplate>
 
             <local:WeekendSelector x:Key="WeekendSelector"
@@ -44,13 +56,13 @@
 
     <ContentPage.Content>
 
-        <Grid RowDefinitions="Auto,*">
+        <StackLayout>
 
-            <SearchBar x:Name="SearchBar" Placeholder="Day of Week Filter" Grid.Row="0" />
+            <SearchBar x:Name="SearchBar" Placeholder="Day of Week Filter" />
 
-            <CollectionView Grid.Row="1" x:Name="CollectionView" ItemTemplate="{StaticResource WeekendSelector}" 
+            <CollectionView x:Name="CollectionView" ItemTemplate="{StaticResource WeekendSelector}" 
                             EmptyViewTemplate="{StaticResource SearchTermSelector}"/>
 
-        </Grid>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

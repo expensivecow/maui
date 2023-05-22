@@ -44,8 +44,6 @@ namespace Microsoft.Maui.Controls
 
 		string IDataTemplateController.IdString => _idString;
 
-		internal int Id => _id;
-
 		int IDataTemplateController.Id => _id;
 
 		/// <include file="../../docs/Microsoft.Maui.Controls/DataTemplate.xml" path="//Member[@MemberName='SetBinding']/Docs/*" />
