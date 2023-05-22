@@ -3,5 +3,4 @@
 override Microsoft.Maui.Controls.View.ChangeVisualState() -> void
 ~override Microsoft.Maui.Controls.Platform.Compatibility.ShellSectionRootRenderer.TraitCollectionDidChange(UIKit.UITraitCollection previousTraitCollection) -> void
 ~override Microsoft.Maui.Controls.Handlers.Items.CarouselViewController.DetermineCellReuseId(Foundation.NSIndexPath indexPath) -> string
-*REMOVED*override Microsoft.Maui.Controls.Handlers.Compatibility.PhoneFlyoutPageRenderer.WillRotate(UIKit.UIInterfaceOrientation toInterfaceOrientation, double duration) -> void
 ~virtual Microsoft.Maui.Controls.Handlers.Items.ItemsViewController<TItemsView>.DetermineCellReuseId(Foundation.NSIndexPath indexPath) -> string
