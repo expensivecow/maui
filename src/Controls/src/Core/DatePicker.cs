@@ -13,7 +13,6 @@ namespace Microsoft.Maui.Controls
 		/// <include file="../../docs/Microsoft.Maui.Controls/DatePicker.xml" path="//Member[@MemberName='DateProperty']/Docs/*" />
 		public static readonly BindableProperty DateProperty = BindableProperty.Create(nameof(Date), typeof(DateTime), typeof(DatePicker), default(DateTime), BindingMode.TwoWay,
 			coerceValue: CoerceDate,
-			propertyChanged: DatePropertyChanged,
 			defaultValueCreator: (bindable) => DateTime.Today);
 
 		/// <include file="../../docs/Microsoft.Maui.Controls/DatePicker.xml" path="//Member[@MemberName='MinimumDateProperty']/Docs/*" />
@@ -158,6 +157,12 @@ namespace Microsoft.Maui.Controls
 
 		static object CoerceDate(BindableObject bindable, object value)
 		{
+			var datePicker = (DatePicker)bindable;
+			EventHandler<DateChangedEventArgs> selected = datePicker.DateSelected;
+
+			if (selected != null)
+				selected(datePicker, new DateChangedEventArgs((DateTime)datePicker.Date, (DateTime)value));
+
 			var picker = (DatePicker)bindable;
 			DateTime dateValue = ((DateTime)value).Date;
 
@@ -188,15 +193,6 @@ namespace Microsoft.Maui.Controls
 				picker.Date = dateValue;
 
 			return dateValue;
-		}
-
-		static void DatePropertyChanged(BindableObject bindable, object oldValue, object newValue)
-		{
-			var datePicker = (DatePicker)bindable;
-			EventHandler<DateChangedEventArgs> selected = datePicker.DateSelected;
-
-			if (selected != null)
-				selected(datePicker, new DateChangedEventArgs((DateTime)oldValue, (DateTime)newValue));
 		}
 
 		static bool ValidateMaximumDate(BindableObject bindable, object value)
