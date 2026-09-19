@@ -36,15 +36,9 @@ namespace Microsoft.Maui.Controls.Handlers.Items
 
 			if (disposing)
 			{
-				if (_headerViewFormsElement != null)
-				{
-					_headerViewFormsElement.MeasureInvalidated -= OnFormsElementMeasureInvalidated;
-				}
+				_headerViewFormsElement?.MeasureInvalidated -= OnFormsElementMeasureInvalidated;
 
-				if (_footerViewFormsElement != null)
-				{
-					_footerViewFormsElement.MeasureInvalidated -= OnFormsElementMeasureInvalidated;
-				}
+				_footerViewFormsElement?.MeasureInvalidated -= OnFormsElementMeasureInvalidated;
 
 				_headerUIView = null;
 				_headerViewFormsElement = null;
